@@ -79,7 +79,7 @@ const Sidebar = () => {
 
           {/* Copyright */}
           <div className="mt-10 text-center text-sm text-[#7d7789]">
-            © {new Date().getFullYear()} Datta Rahegaonkar
+            © {new Date().getFullYear()} <Link to="/"> Datta Rahegaonkar </Link>
           </div>
         </div>
       </aside>

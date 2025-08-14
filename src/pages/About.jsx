@@ -31,10 +31,10 @@ export default function About() {
                 Website :
                 <span className="font-normal text-[#504e70]"> Datta Rahegaonkar</span>
               </p>
-              <p className="border-b border-gray-300 pb-2 font-semibold text-[#302e4d]">
+              {/* <p className="border-b border-gray-300 pb-2 font-semibold text-[#302e4d]">
                 Email :
                 <span className="font-normal text-[#504e70]"> dattarahegaonkar09@gmail.com</span>
-              </p>
+              </p> */}
               <p className="border-b border-gray-300 pb-2 font-semibold text-[#302e4d]">
                 Degree :
                 <span className="font-normal text-[#504e70]"> Bachelor of Engineering (B.E)</span>

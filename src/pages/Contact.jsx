@@ -35,7 +35,7 @@ export default function Contact() {
         </div>
 
         {/* Contact Info */}
-        <div className="flex flex-wrap justify-between text-center gap-y-12 mb-16">
+        {/* <div className="flex flex-wrap justify-between text-center gap-y-12 mb-16">
           <div className="w-full sm:w-1/3 px-4">
             <div className="text-4xl mb-3">
               <i className="fa fa-map-marker" />
@@ -57,7 +57,7 @@ export default function Contact() {
             <h4 className="text-lg font-bold mb-1">Email</h4>
             <p className="text-[#504e70]">dattarahegaonkar09@email.com</p>
           </div>
-        </div>
+        </div> */}
 
         {/* Contact Form */}
         <form
