@@ -1,24 +1,24 @@
 export default function Projects() {
   const projects = [
     {
-      title: "DevOps Portfolio",
-      img: "/imgs/projects/devops-portfolio.png",
+      title: "E-Commerce Web App ( Three Tier )",
+      img: "/imgs/projects/signup.png",
       description: "A portfolio site showcasing my DevOps skills and projects using React, TailwindCSS, and CI/CD tools A portfolio site showcasing my DevOps skills and projects using React, TailwindCSS, and CI/CD tools.",
-      github: "https://github.com/DattaRahegaonkar/devops-portfolio",
+      github: "https://github.com/DattaRahegaonkar/TWSThreeTierAppChallenge/tree/main/Application-Code-2",
       live: "https://datta.dev",
     },
     {
-      title: "Weather App",
-      img: "/imgs/projects/weather-app.png",
+      title: "Climate-Cast Weather Web App",
+      img: "/imgs/projects/climate.png",
       description: "A modern weather app built with React and TailwindCSS using OpenWeatherMap API.",
-      github: "https://github.com/DattaRahegaonkar/weather-app",
-      live: "https://weather.datta.dev",
+      github: "https://github.com/DattaRahegaonkar/Climate-Cast",
+      live: "https://climate-cast-mu.vercel.app/",
     },
     {
-      title: "Kubernetes Monitoring",
-      img: "/imgs/projects/k8s-monitor.png",
+      title: "Chatapp DevSecOps Deployment",
+      img: "/imgs/projects/chatapp.png",
       description: "Prometheus & Grafana setup for full-stack monitoring of Kubernetes workloads.",
-      github: "https://github.com/DattaRahegaonkar/k8s-monitoring",
+      github: "https://github.com/DattaRahegaonkar/DevSecOps-Project",
       live: "https://weather.datta.dev",
     },
     
