@@ -41,14 +41,14 @@ export default function About() {
               Personal Info
             </h3>
             <div className="space-y-3">
-              <p className={`border-b pb-2 font-semibold transition-colors duration-300 ${
+              {/* <p className={`border-b pb-2 font-semibold transition-colors duration-300 ${
                 isDark ? 'border-gray-600 text-white' : 'border-gray-300 text-[#302e4d]'
               }`}>
                 Website :
                 <span className={`font-normal transition-colors duration-300 ${
                   isDark ? 'text-gray-400' : 'text-[#504e70]'
                 }`}> Datta Rahegaonkar</span>
-              </p>
+              </p> */}
               <p className={`border-b pb-2 font-semibold transition-colors duration-300 ${
                 isDark ? 'border-gray-600 text-white' : 'border-gray-300 text-[#302e4d]'
               }`}>
