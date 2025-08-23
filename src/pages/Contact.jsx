@@ -1,8 +1,10 @@
 import { useRef } from "react";
 import emailjs from "@emailjs/browser";
+import { useTheme } from "../context/ThemeContext";
 
 export default function Contact() {
   const form = useRef();
+  const { isDark } = useTheme();
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -27,11 +29,13 @@ export default function Contact() {
   };
 
   return (
-    <main className="min-h-screen bg-[#F2F2FC] text-[#302e4d] py-10 px-4 md:px-10 lg:px-20">
+    <main className={`min-h-screen py-10 px-4 md:px-10 lg:px-20 transition-colors duration-300 ${
+      isDark ? 'bg-gray-900 text-white' : 'bg-[#F2F2FC] text-[#302e4d]'
+    }`}>
       <section id="contact" className="max-w-6xl mx-auto w-full">
         {/* Title */}
         <div className="mb-10 text-center">
-          <h2 className="text-3xl font-bold">Contact Me</h2>
+          <h2 className="text-3xl font-bold transition-colors duration-300">Contact Me</h2>
         </div>
 
         {/* Contact Info */}
@@ -45,7 +49,7 @@ export default function Contact() {
           </div>
           <div className="w-full sm:w-1/3 px-4">
             <div className="text-4xl mb-3">
-              <i className="fa fa-phone" />
+              <i className="fa fa-calendar" />
             </div>
             <h4 className="text-lg font-bold mb-1">Call Us On</h4>
             <p className="text-[#504e70]">+99 **********</p>
@@ -71,33 +75,51 @@ export default function Contact() {
               name="name"
               placeholder="Name*"
               required
-              className="flex-1 min-w-[250px] border border-[#d4d4e3] rounded-full py-3 px-6 text-[#504e70] outline-none focus:shadow-lg bg-white w-full"
+              className={`flex-1 min-w-[250px] border rounded-full py-3 px-6 outline-none focus:shadow-lg w-full transition-colors duration-300 ${
+                isDark 
+                  ? 'border-gray-600 text-gray-300 placeholder-gray-500 bg-gray-800 focus:shadow-gray-800/50' 
+                  : 'border-[#d4d4e3] text-[#504e70] bg-white'
+              }`}
             />
             <input
               type="email"
               name="email"
               placeholder="Email*"
               required
-              className="flex-1 min-w-[250px] border border-[#d4d4e3] rounded-full py-3 px-6 text-[#504e70] outline-none focus:shadow-lg bg-white w-full"
+              className={`flex-1 min-w-[250px] border rounded-full py-3 px-6 outline-none focus:shadow-lg w-full transition-colors duration-300 ${
+                isDark 
+                  ? 'border-gray-600 text-gray-300 placeholder-gray-500 bg-gray-800 focus:shadow-gray-800/50' 
+                  : 'border-[#d4d4e3] text-[#504e70] bg-white'
+              }`}
             />
           </div>
           <input
             type="text"
             name="subject"
             placeholder="Subject*"
-            className="w-full border border-[#d4d4e3] rounded-full py-3 px-6 text-[#504e70] outline-none focus:shadow-lg bg-white"
+            className={`w-full border rounded-full py-3 px-6 outline-none focus:shadow-lg transition-colors duration-300 ${
+              isDark 
+                ? 'border-gray-600 text-gray-300 placeholder-gray-500 bg-gray-800 focus:shadow-gray-800/50' 
+                : 'border-[#d4d4e3] text-[#504e70] bg-white'
+            }`}
           />
           <textarea
             name="message"
             placeholder="Your Message*"
             rows={6}
             required
-            className="w-full border border-[#d4d4e3] rounded-3xl py-3 px-6 text-[#504e70] outline-none focus:shadow-lg resize-none bg-white"
+            className={`w-full border rounded-3xl py-3 px-6 outline-none focus:shadow-lg resize-none transition-colors duration-300 ${
+              isDark 
+                ? 'border-gray-600 text-gray-300 placeholder-gray-500 bg-gray-800 focus:shadow-gray-800/50' 
+                : 'border-[#d4d4e3] text-[#504e70] bg-white'
+            }`}
           ></textarea>
           <div className="text-center">
             <button
               type="submit"
-              className="bg-[#302e4d] text-white rounded-full px-10 py-3 font-semibold hover:shadow-md transition"
+              className={`text-white rounded-full px-10 py-3 font-semibold hover:shadow-md transition-all duration-300 ${
+                isDark ? 'bg-blue-600 hover:bg-blue-700' : 'bg-[#302e4d]'
+              }`}
             >
               Send Message
             </button>

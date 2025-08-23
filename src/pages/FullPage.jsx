@@ -4,10 +4,15 @@ import About from './About';
 import Skills from './Skills';
 import Projects from './Projects';
 import Contact from './Contact';
+import { useTheme } from '../context/ThemeContext';
 
 export default function FullPage() {
+  const { isDark } = useTheme();
+
   return (
-    <main className="bg-[#F2F2FC] text-[#302e4d] dark:bg-[#0e0e0e] dark:text-white">
+    <main className={`transition-colors duration-300 ${
+      isDark ? 'bg-gray-900 text-white' : 'bg-[#F2F2FC] text-[#302e4d]'
+    }`}>
       {/* Scrollable full-page sections */}
       <section id="home" className="h-screen overflow-hidden scroll-mt-16">
         <Home />

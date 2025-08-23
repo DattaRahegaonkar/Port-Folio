@@ -1,6 +1,9 @@
 // src/pages/Skills.jsx
+import { useTheme } from "../context/ThemeContext";
 
 export default function Skills() {
+  const { isDark } = useTheme();
+  
   const skills = [
     { name: "Docker", img: "/imgs/skills/docker.png" },
     { name: "Linux", img: "/imgs/skills/linux.png" },
@@ -24,16 +27,24 @@ export default function Skills() {
   ];
 
   return (
-    <section className="w-full min-h-screen flex items-center justify-center bg-[#F2F2FC] px-4 py-12">
+    <section className={`w-full min-h-screen flex items-center justify-center px-4 py-12 transition-colors duration-300 ${
+      isDark ? 'bg-gray-900' : 'bg-[#F2F2FC]'
+    }`}>
       <div className="max-w-6xl w-full">
-        <h2 className="text-3xl font-bold text-center text-[#302e4d] mb-10">
+        <h2 className={`text-3xl font-bold text-center mb-10 transition-colors duration-300 ${
+          isDark ? 'text-white' : 'text-[#302e4d]'
+        }`}>
           Skills
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {skills.map((skill, idx) => (
             <div
               key={idx}
-              className="bg-white border border-[#d4d4e3] rounded-xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-lg transition-shadow duration-300"
+              className={`rounded-xl p-6 flex flex-col items-center text-center shadow-sm hover:shadow-lg transition-all duration-300 hover:scale-105 ${
+                isDark 
+                  ? 'bg-gray-800 border border-gray-600 shadow-gray-900/50' 
+                  : 'bg-white border border-[#d4d4e3]'
+              }`}
             >
               <div className="w-20 h-20 mb-4">
                 <img
@@ -42,7 +53,9 @@ export default function Skills() {
                   className="w-full h-full object-contain"
                 />
               </div>
-              <p className="text-[#504e70] font-medium text-sm">{skill.name}</p>
+              <p className={`font-medium text-sm transition-colors duration-300 ${
+                isDark ? 'text-gray-300' : 'text-[#504e70]'
+              }`}>{skill.name}</p>
             </div>
           ))}
         </div>

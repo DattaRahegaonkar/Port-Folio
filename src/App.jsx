@@ -8,10 +8,12 @@ import About from "./pages/About";
 import Skills from "./pages/Skills";
 import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
+import { ThemeProvider, useTheme } from "./context/ThemeContext";
 
 function AppRoutes() {
   const location = useLocation();
   const navigate = useNavigate();
+  const { isDark } = useTheme();
 
   useEffect(() => {
     const navEntry = performance.getEntriesByType("navigation")[0];
@@ -24,7 +26,9 @@ function AppRoutes() {
   }, []);
 
   return (
-    <main className="flex-1 bg-[#F2F2FC] min-h-screen p-4 sm:ml-64 overflow-y-auto no-scrollbar">
+    <main className={`flex-1 min-h-screen p-4 pt-24 overflow-y-auto no-scrollbar transition-colors duration-300 ${
+      isDark ? 'bg-gray-900' : 'bg-[#F2F2FC]'
+    }`}>
       <Routes>
         <Route path="/" element={<FullPage />} />
         <Route path="/home" element={<Home />} />
@@ -39,11 +43,13 @@ function AppRoutes() {
 
 export default function App() {
   return (
-    <Router>
-      <div className="flex w-full h-screen overflow-hidden">
-        <Sidebar />
-        <AppRoutes />
-      </div>
-    </Router>
+    <ThemeProvider>
+      <Router>
+        <div className="flex flex-col w-full h-screen overflow-hidden">
+          <Sidebar />
+          <AppRoutes />
+        </div>
+      </Router>
+    </ThemeProvider>
   );
 }
