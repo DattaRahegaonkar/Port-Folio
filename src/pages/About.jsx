@@ -68,7 +68,7 @@ export default function About() {
             </div>
             <div className="mt-6">
               <a
-                href="/src/assets/Datta_Rahegaonkar_CV.pdf"
+                href="https://drive.google.com/file/d/1Zh1Ot-iHysUShTWIxyqCKTTevtm7Kz6d/view?usp=sharing"
                 target="_blank"
                 className={`inline-block px-6 py-2 text-white font-semibold rounded transition-colors duration-300 ${
                   isDark ? 'bg-blue-600 hover:bg-blue-700' : 'bg-[#6c63ff] hover:bg-[#5a52e8]'
