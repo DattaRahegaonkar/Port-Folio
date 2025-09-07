@@ -16,7 +16,7 @@ export default function Projects() {
       img: "/imgs/projects/climate.png",
       description: "A modern weather app built with React and TailwindCSS using OpenWeatherMap API.",
       github: "https://github.com/DattaRahegaonkar/Climate-Cast",
-      live: "https://climate-cast-mu.vercel.app/",
+      live: "https://climatewcast.netlify.app/",
     },
     {
       title: "Chatapp DevSecOps Deployment",
