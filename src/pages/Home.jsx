@@ -12,7 +12,7 @@ export default function Home() {
     >
       <div className="text-center">
         <img
-          src="/Datta Rahegaonkar 2.png"
+          src="/Datta Rahegaonkar.png"
           alt="Datta Rahegaonkar"
           className={`w-[250px] h-[250px] rounded-full border-[8px] inline-block shadow-md transition-all duration-300 ${
             isDark ? 'border-gray-700 shadow-gray-800/50' : 'border-white shadow-md'

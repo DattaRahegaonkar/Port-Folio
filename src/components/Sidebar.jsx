@@ -56,7 +56,7 @@ const Sidebar = () => {
                 isDark ? 'text-white hover:text-blue-400' : 'text-[#302e4d] hover:text-blue-600'
               }`}
             >
-              Folio
+              PortFolio
             </Link>
           </div>
 
