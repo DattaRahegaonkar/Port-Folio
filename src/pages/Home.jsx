@@ -26,7 +26,7 @@ export default function Home() {
         <p className={`text-[16px] font-medium leading-[22px] transition-colors duration-300 ${
           isDark ? 'text-gray-300' : 'text-[#333]'
         }`}>
-          DevOps | Cloud Computing | Web Development Enthusiast
+          DevOps | Cloud Computing
         </p>
 
         <div className="social-links mt-6 flex justify-center gap-3">
