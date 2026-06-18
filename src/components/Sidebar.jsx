@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
-import { useTheme } from "../context/ThemeContext";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Sidebar = () => {
@@ -8,7 +7,6 @@ const Sidebar = () => {
   const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
   const path = location.pathname;
-  const { isDark, toggleTheme } = useTheme();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -19,11 +17,11 @@ const Sidebar = () => {
   const closeSidebar = () => setOpen(false);
 
   const navLinks = [
-    { name: "Home", href: "/", icon: "fa-home" },
-    { name: "About", href: "/about", icon: "fa-user" },
-    { name: "Skills", href: "/skill", icon: "fa-list" },
+    { name: "Home",     href: "/",        icon: "fa-home" },
+    { name: "About",    href: "/about",   icon: "fa-user" },
+    { name: "Skills",   href: "/skill",   icon: "fa-list" },
     { name: "Projects", href: "/project", icon: "fa-envelope" },
-    { name: "Contact", href: "/contact", icon: "fa-comments" },
+    { name: "Contact",  href: "/contact", icon: "fa-comments" },
   ];
 
   return (
@@ -31,13 +29,11 @@ const Sidebar = () => {
       {/* Mobile Toggle */}
       <div
         onClick={() => setOpen(!open)}
-        className={`sm:hidden fixed top-5 right-4 z-50 border transition-all duration-300 w-[45px] h-[40px] flex items-center justify-center rounded-md cursor-pointer ${
-          isDark ? "border-gray-600 bg-gray-800/80" : "border-gray-300 bg-white/80"
-        } backdrop-blur-md`}
+        className="sm:hidden fixed top-5 right-4 z-50 border border-gray-600 bg-gray-800/80 backdrop-blur-md w-[45px] h-[40px] flex items-center justify-center rounded-md cursor-pointer transition-all duration-300"
       >
-        <div className={`relative w-[18px] h-[2px] transition-all duration-300 ${isDark ? "bg-gray-300" : "bg-gray-700"} ${open ? "bg-transparent" : ""}`}>
-          <span className={`absolute top-[-6px] left-0 w-[18px] h-[2.5px] transition-transform duration-300 ${isDark ? "bg-gray-300" : "bg-gray-700"} ${open ? "rotate-45 top-0" : ""}`} />
-          <span className={`absolute top-[6px] left-0 w-[18px] h-[2.5px] transition-transform duration-300 ${isDark ? "bg-gray-300" : "bg-gray-700"} ${open ? "-rotate-45 top-0" : ""}`} />
+        <div className={`relative w-[18px] h-[2px] bg-gray-300 transition-all duration-300 ${open ? "bg-transparent" : ""}`}>
+          <span className={`absolute left-0 w-[18px] h-[2.5px] bg-gray-300 transition-transform duration-300 ${open ? "rotate-45 top-0" : "top-[-6px]"}`} />
+          <span className={`absolute left-0 w-[18px] h-[2.5px] bg-gray-300 transition-transform duration-300 ${open ? "-rotate-45 top-0" : "top-[6px]"}`} />
         </div>
       </div>
 
@@ -49,22 +45,14 @@ const Sidebar = () => {
         className={`fixed top-0 left-0 right-0 h-[60px] z-40 border-b transition-all duration-300
           ${open ? "translate-y-0" : "-translate-y-full sm:translate-y-0"}
           ${scrolled
-            ? isDark
-              ? "bg-gray-900/80 backdrop-blur-md border-gray-700/50 shadow-lg shadow-black/20"
-              : "bg-white/80 backdrop-blur-md border-gray-200/50 shadow-lg shadow-black/10"
-            : isDark
-              ? "bg-gray-900 border-gray-700"
-              : "bg-[#fdf9ff] border-[#e8dfec]"
+            ? "bg-gray-900/80 backdrop-blur-md border-gray-700/50 shadow-lg shadow-black/20"
+            : "bg-gray-900 border-gray-700"
           }`}
       >
         <div className="w-full h-full px-[30px] flex items-center justify-between">
           {/* Logo */}
           <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-            <Link
-              to="/"
-              onClick={closeSidebar}
-              className={`text-[28px] font-bold font-[Rubik] transition-colors duration-300 gradient-text`}
-            >
+            <Link to="/" onClick={closeSidebar} className="text-[28px] font-bold font-[Rubik] gradient-text">
               Portfolio
             </Link>
           </motion.div>
@@ -80,38 +68,20 @@ const Sidebar = () => {
               >
                 <Link
                   to={href}
-                  className={`relative flex items-center text-[15px] font-semibold capitalize transition-all duration-300 px-3 py-1.5 rounded-md group ${
-                    isDark
-                      ? `text-gray-200 hover:text-blue-400 ${path === href ? "text-blue-400 font-bold" : ""}`
-                      : `text-[#302e4d] hover:text-blue-600 ${path === href ? "text-blue-600 font-bold" : ""}`
-                  }`}
+                  className={`relative flex items-center text-[15px] font-semibold capitalize transition-all duration-300 px-3 py-1.5 rounded-md
+                    text-gray-200 hover:text-blue-400 ${path === href ? "text-blue-400 font-bold" : ""}`}
                 >
                   <i className={`fa ${icon} mr-[8px]`} />
                   {name}
                   {path === href && (
                     <motion.span
                       layoutId="activeTab"
-                      className="absolute inset-0 rounded-md -z-10"
-                      style={{ background: isDark ? "rgba(59,130,246,0.15)" : "rgba(108,99,255,0.1)" }}
+                      className="absolute inset-0 rounded-md -z-10 bg-blue-500/15"
                     />
                   )}
                 </Link>
               </motion.li>
             ))}
-
-            <motion.li initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }}>
-              <motion.button
-                onClick={toggleTheme}
-                whileHover={{ scale: 1.15, rotate: 15 }}
-                whileTap={{ scale: 0.9 }}
-                className={`w-[35px] h-[35px] rounded-full flex items-center justify-center transition-all duration-300 ${
-                  isDark ? "bg-gray-700 text-yellow-300 hover:bg-gray-600" : "bg-gray-200 text-gray-700 hover:bg-gray-300"
-                }`}
-                title={isDark ? "Switch to Light Mode" : "Switch to Dark Mode"}
-              >
-                <i className={`fa ${isDark ? "fa-sun" : "fa-moon"} text-[16px]`}></i>
-              </motion.button>
-            </motion.li>
           </ul>
         </div>
 
@@ -123,9 +93,7 @@ const Sidebar = () => {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className={`sm:hidden absolute top-full left-0 right-0 border-b shadow-lg overflow-hidden ${
-                isDark ? "bg-gray-900/95 backdrop-blur-md border-gray-700" : "bg-white/95 backdrop-blur-md border-[#e8dfec]"
-              }`}
+              className="sm:hidden absolute top-full left-0 right-0 border-b border-gray-700 bg-gray-900/95 backdrop-blur-md shadow-lg overflow-hidden"
             >
               <ul className="py-4 space-y-1">
                 {navLinks.map(({ name, href, icon }, i) => (
@@ -138,33 +106,14 @@ const Sidebar = () => {
                   >
                     <Link
                       to={href}
-                      className={`block text-[16px] font-semibold capitalize transition-all duration-300 px-6 py-3 ${
-                        isDark
-                          ? `text-gray-200 hover:bg-gray-800 hover:text-blue-400 ${path === href ? "text-blue-400 bg-gray-800" : ""}`
-                          : `text-[#302e4d] hover:bg-blue-50 hover:text-blue-600 ${path === href ? "text-blue-600 bg-blue-50" : ""}`
-                      }`}
+                      className={`block text-[16px] font-semibold capitalize transition-all duration-300 px-6 py-3
+                        text-gray-200 hover:bg-gray-800 hover:text-blue-400 ${path === href ? "text-blue-400 bg-gray-800" : ""}`}
                     >
                       <i className={`fa ${icon} mr-[8px]`} />
                       {name}
                     </Link>
                   </motion.li>
                 ))}
-                <motion.li
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 }}
-                  className="px-6 py-3"
-                >
-                  <button
-                    onClick={toggleTheme}
-                    className={`flex items-center text-[16px] font-semibold capitalize ${
-                      isDark ? "text-yellow-300" : "text-[#302e4d]"
-                    }`}
-                  >
-                    <i className={`fa ${isDark ? "fa-sun" : "fa-moon"} mr-[8px]`}></i>
-                    {isDark ? "Light Mode" : "Dark Mode"}
-                  </button>
-                </motion.li>
               </ul>
             </motion.div>
           )}

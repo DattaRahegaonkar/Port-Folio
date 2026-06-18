@@ -1,26 +1,25 @@
-import { useTheme } from "../context/ThemeContext";
 import { motion } from "framer-motion";
 
 const skills = [
-  { name: "Docker", img: "/imgs/skills/docker.png" },
-  { name: "Linux", img: "/imgs/skills/linux.png" },
-  { name: "Git", img: "/imgs/skills/git.png" },
-  { name: "Python", img: "/imgs/skills/python.png" },
-  { name: "GitHub", img: "/imgs/skills/github.png" },
-  { name: "Scripting", img: "/imgs/skills/shell.png" },
-  { name: "AWS", img: "/imgs/skills/aws.png" },
-  { name: "Kubernetes", img: "/imgs/skills/kubernetes.png" },
-  { name: "Jenkins", img: "/imgs/skills/jenkins.png" },
-  { name: "SonarQube", img: "/imgs/skills/sonarqube.png" },
-  { name: "Trivy", img: "/imgs/skills/trivy.png" },
-  { name: "ArgoCD", img: "/imgs/skills/argocd.png" },
-  { name: "HTML5", img: "/imgs/skills/html.png" },
-  { name: "CSS", img: "/imgs/skills/css.png" },
-  { name: "JavaScript", img: "/imgs/skills/js.png" },
+  { name: "Docker",       img: "/imgs/skills/docker.png" },
+  { name: "Linux",        img: "/imgs/skills/linux.png" },
+  { name: "Git",          img: "/imgs/skills/git.png" },
+  { name: "Python",       img: "/imgs/skills/python.png" },
+  { name: "GitHub",       img: "/imgs/skills/github.png" },
+  { name: "Scripting",    img: "/imgs/skills/shell.png" },
+  { name: "AWS",          img: "/imgs/skills/aws.png" },
+  { name: "Kubernetes",   img: "/imgs/skills/kubernetes.png" },
+  { name: "Jenkins",      img: "/imgs/skills/jenkins.png" },
+  { name: "SonarQube",    img: "/imgs/skills/sonarqube.png" },
+  { name: "Trivy",        img: "/imgs/skills/trivy.png" },
+  { name: "ArgoCD",       img: "/imgs/skills/argocd.png" },
+  { name: "HTML5",        img: "/imgs/skills/html.png" },
+  { name: "CSS",          img: "/imgs/skills/css.png" },
+  { name: "JavaScript",   img: "/imgs/skills/js.png" },
   { name: "Tailwind CSS", img: "/imgs/skills/Tailwind.png" },
-  { name: "Node.js", img: "/imgs/skills/nodejs.png" },
-  { name: "MongoDB", img: "/imgs/skills/mongodb.png" },
-  { name: "MySQL", img: "/imgs/skills/mysql.png" },
+  { name: "Node.js",      img: "/imgs/skills/nodejs.png" },
+  { name: "MongoDB",      img: "/imgs/skills/mongodb.png" },
+  { name: "MySQL",        img: "/imgs/skills/mysql.png" },
 ];
 
 const container = {
@@ -30,19 +29,14 @@ const container = {
 
 const item = {
   hidden: { opacity: 0, y: 30, scale: 0.9 },
-  show: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
+  show:   { opacity: 1, y: 0,  scale: 1, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
 export default function Skills() {
-  const { isDark } = useTheme();
-
   return (
-    <section className={`w-full min-h-screen flex items-center justify-center px-4 py-16 transition-colors duration-300 ${
-      isDark ? "bg-gray-900" : "bg-[#F2F2FC]"
-    }`}>
+    <section className="w-full min-h-screen flex items-center justify-center px-4 py-16 bg-gray-900">
       <div className="max-w-6xl w-full">
 
-        {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -61,7 +55,6 @@ export default function Skills() {
           />
         </motion.div>
 
-        {/* Grid */}
         <motion.div
           variants={container}
           initial="hidden"
@@ -75,21 +68,16 @@ export default function Skills() {
               variants={item}
               whileHover={{ scale: 1.08, y: -4 }}
               whileTap={{ scale: 0.97 }}
-              className={`rounded-2xl p-5 flex flex-col items-center text-center cursor-pointer border transition-all duration-300 ${
-                isDark
-                  ? "bg-gray-800 border-gray-700 hover:border-blue-500/60 hover:shadow-lg hover:shadow-blue-500/10"
-                  : "bg-white border-[#d4d4e3] hover:border-[#6c63ff]/50 hover:shadow-lg hover:shadow-purple-200"
-              }`}
+              className="rounded-2xl p-5 flex flex-col items-center text-center cursor-pointer border border-gray-700 bg-gray-800 hover:border-blue-500/60 hover:shadow-lg hover:shadow-blue-500/10 transition-all duration-300"
             >
               <div className="w-16 h-16 mb-3">
                 <img src={skill.img} alt={skill.name} className="w-full h-full object-contain" />
               </div>
-              <p className={`font-semibold text-sm ${isDark ? "text-gray-300" : "text-[#504e70]"}`}>
-                {skill.name}
-              </p>
+              <p className="font-semibold text-sm text-gray-300">{skill.name}</p>
             </motion.div>
           ))}
         </motion.div>
+
       </div>
     </section>
   );

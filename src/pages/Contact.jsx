@@ -1,11 +1,11 @@
 import { useRef } from "react";
 import emailjs from "@emailjs/browser";
-import { useTheme } from "../context/ThemeContext";
 import { motion } from "framer-motion";
+
+const inputClass = "w-full border border-gray-600 rounded-2xl py-3 px-5 outline-none bg-gray-800 text-gray-300 placeholder-gray-500 transition-all duration-300 focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500";
 
 export default function Contact() {
   const form = useRef();
-  const { isDark } = useTheme();
 
   const sendEmail = (e) => {
     e.preventDefault();
@@ -17,19 +17,10 @@ export default function Contact() {
       );
   };
 
-  const inputClass = `w-full border rounded-2xl py-3 px-5 outline-none transition-all duration-300 focus:ring-2 ${
-    isDark
-      ? "border-gray-600 text-gray-300 placeholder-gray-500 bg-gray-800 focus:ring-blue-500/40 focus:border-blue-500"
-      : "border-[#d4d4e3] text-[#504e70] bg-white focus:ring-purple-300 focus:border-[#6c63ff]"
-  }`;
-
   return (
-    <main className={`min-h-screen py-16 px-4 md:px-10 lg:px-20 transition-colors duration-300 ${
-      isDark ? "bg-gray-900 text-white" : "bg-[#F2F2FC] text-[#302e4d]"
-    }`}>
+    <main className="min-h-screen py-16 px-4 md:px-10 lg:px-20 bg-gray-900 text-white">
       <section id="contact" className="max-w-4xl mx-auto w-full">
 
-        {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -46,12 +37,9 @@ export default function Contact() {
             className="h-1 mx-auto mt-3 rounded-full"
             style={{ background: "linear-gradient(135deg, #6c63ff, #3b82f6)" }}
           />
-          <p className={`mt-4 text-sm ${isDark ? "text-gray-400" : "text-[#504e70]"}`}>
-            Have a project or opportunity? I'd love to hear from you.
-          </p>
+          <p className="mt-4 text-sm text-gray-400">Have a project or opportunity? I'd love to hear from you.</p>
         </motion.div>
 
-        {/* Form */}
         <motion.form
           ref={form}
           onSubmit={sendEmail}
@@ -59,39 +47,13 @@ export default function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.2 }}
           viewport={{ once: true }}
-          className={`rounded-3xl p-8 border space-y-5 ${
-            isDark
-              ? "bg-gray-800/50 border-gray-700 backdrop-blur-sm"
-              : "bg-white border-[#d4d4e3] shadow-xl shadow-purple-100/50"
-          }`}
+          className="rounded-3xl p-8 border border-gray-700 bg-gray-800/50 backdrop-blur-sm space-y-5"
         >
           <div className="flex flex-wrap gap-4">
-            <motion.input
-              whileFocus={{ scale: 1.01 }}
-              type="text"
-              name="name"
-              placeholder="Your Name *"
-              required
-              className={`flex-1 min-w-[220px] ${inputClass}`}
-            />
-            <motion.input
-              whileFocus={{ scale: 1.01 }}
-              type="email"
-              name="email"
-              placeholder="Your Email *"
-              required
-              className={`flex-1 min-w-[220px] ${inputClass}`}
-            />
+            <motion.input whileFocus={{ scale: 1.01 }} type="text"  name="name"    placeholder="Your Name *"  required className={`flex-1 min-w-[220px] ${inputClass}`} />
+            <motion.input whileFocus={{ scale: 1.01 }} type="email" name="email"   placeholder="Your Email *" required className={`flex-1 min-w-[220px] ${inputClass}`} />
           </div>
-
-          <motion.input
-            whileFocus={{ scale: 1.01 }}
-            type="text"
-            name="subject"
-            placeholder="Subject"
-            className={inputClass}
-          />
-
+          <motion.input   whileFocus={{ scale: 1.01 }} type="text"  name="subject" placeholder="Subject"               className={inputClass} />
           <motion.textarea
             whileFocus={{ scale: 1.01 }}
             name="message"
@@ -100,7 +62,6 @@ export default function Contact() {
             required
             className={`${inputClass} resize-none`}
           />
-
           <div className="text-center pt-2">
             <motion.button
               type="submit"
@@ -109,8 +70,7 @@ export default function Contact() {
               className="text-white rounded-full px-12 py-3 font-semibold transition-all duration-300"
               style={{ background: "linear-gradient(135deg, #6c63ff, #3b82f6)" }}
             >
-              <i className="fa fa-paper-plane mr-2" />
-              Send Message
+              <i className="fa fa-paper-plane mr-2" />Send Message
             </motion.button>
           </div>
         </motion.form>

@@ -1,4 +1,3 @@
-import { useTheme } from "../context/ThemeContext";
 import { motion } from "framer-motion";
 
 const projects = [
@@ -35,19 +34,14 @@ const container = {
 
 const card = {
   hidden: { opacity: 0, y: 50 },
-  show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  show:   { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
 };
 
 export default function Projects() {
-  const { isDark } = useTheme();
-
   return (
-    <section className={`w-full min-h-screen flex items-center justify-center px-4 py-16 transition-colors duration-300 ${
-      isDark ? "bg-gray-900" : "bg-[#F2F2FC]"
-    }`}>
+    <section className="w-full min-h-screen flex items-center justify-center px-4 py-16 bg-gray-900">
       <div className="max-w-6xl w-full">
 
-        {/* Title */}
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -66,7 +60,6 @@ export default function Projects() {
           />
         </motion.div>
 
-        {/* Cards */}
         <motion.div
           variants={container}
           initial="hidden"
@@ -79,11 +72,7 @@ export default function Projects() {
               key={project.title}
               variants={card}
               whileHover={{ y: -8 }}
-              className={`rounded-2xl overflow-hidden border flex flex-col transition-all duration-300 ${
-                isDark
-                  ? "bg-gray-800 border-gray-700 hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/10"
-                  : "bg-white border-[#d4d4e3] hover:border-[#6c63ff]/40 hover:shadow-xl hover:shadow-purple-100"
-              }`}
+              className="rounded-2xl overflow-hidden border border-gray-700 bg-gray-800 flex flex-col hover:border-blue-500/50 hover:shadow-xl hover:shadow-blue-500/10 transition-all duration-300"
             >
               {/* Image with overlay */}
               <div className="relative overflow-hidden h-48 group">
@@ -113,31 +102,21 @@ export default function Projects() {
               </div>
 
               <div className="p-5 flex flex-col flex-grow">
-                <h3 className={`text-lg font-bold mb-2 ${isDark ? "text-white" : "text-[#302e4d]"}`}>
-                  {project.title}
-                </h3>
-                <p className={`text-sm flex-grow leading-relaxed ${isDark ? "text-gray-300" : "text-[#504e70]"}`}>
-                  {project.description}
-                </p>
+                <h3 className="text-lg font-bold mb-2 text-white">{project.title}</h3>
+                <p className="text-sm flex-grow leading-relaxed text-gray-300">{project.description}</p>
 
-                {/* Tags */}
                 <div className="flex flex-wrap gap-2 mt-4">
                   {project.tags.map((tag) => (
-                    <span key={tag} className={`text-xs px-2 py-1 rounded-full font-medium ${
-                      isDark ? "bg-blue-500/20 text-blue-300 border border-blue-500/30" : "bg-[#6c63ff]/10 text-[#6c63ff] border border-[#6c63ff]/20"
-                    }`}>
+                    <span key={tag} className="text-xs px-2 py-1 rounded-full font-medium bg-blue-500/20 text-blue-300 border border-blue-500/30">
                       {tag}
                     </span>
                   ))}
                 </div>
 
-                {/* Bottom buttons */}
                 <div className="mt-4 flex gap-3">
                   {project.github && (
                     <a href={project.github} target="_blank" rel="noopener noreferrer"
-                      className={`flex-1 text-center py-2 text-sm font-medium rounded-lg transition-all duration-300 ${
-                        isDark ? "bg-gray-700 text-white hover:bg-gray-600" : "bg-gray-100 text-[#302e4d] hover:bg-gray-200"
-                      }`}
+                      className="flex-1 text-center py-2 text-sm font-medium rounded-lg bg-gray-700 text-white hover:bg-gray-600 transition-all duration-300"
                     >
                       <i className="fa-brands fa-github mr-1" />GitHub
                     </a>
@@ -155,6 +134,7 @@ export default function Projects() {
             </motion.div>
           ))}
         </motion.div>
+
       </div>
     </section>
   );
