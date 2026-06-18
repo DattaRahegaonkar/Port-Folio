@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import emailjs from "@emailjs/browser";
 import { useTheme } from "../context/ThemeContext";
+import { motion } from "framer-motion";
 
 export default function Contact() {
   const form = useRef();
@@ -8,123 +9,112 @@ export default function Contact() {
 
   const sendEmail = (e) => {
     e.preventDefault();
-
     emailjs
-      .sendForm(
-        "service_p2psave", // replace with your actual service ID
-        "template_bqmtwxo", // replace with your actual template ID
-        form.current,
-        "B412RMHh6K69crF5M" // replace with your actual public key
-      )
+      .sendForm("service_p2psave", "template_bqmtwxo", form.current, "B412RMHh6K69crF5M")
       .then(
-        (result) => {
-          console.log("Email sent:", result.text);
-          alert("Message sent successfully!");
-        },
-        (error) => {
-          console.error("Error sending email:", error.text);
-          alert("Failed to send message. Try again.");
-        }
+        () => alert("Message sent successfully!"),
+        () => alert("Failed to send message. Try again.")
       );
   };
 
+  const inputClass = `w-full border rounded-2xl py-3 px-5 outline-none transition-all duration-300 focus:ring-2 ${
+    isDark
+      ? "border-gray-600 text-gray-300 placeholder-gray-500 bg-gray-800 focus:ring-blue-500/40 focus:border-blue-500"
+      : "border-[#d4d4e3] text-[#504e70] bg-white focus:ring-purple-300 focus:border-[#6c63ff]"
+  }`;
+
   return (
-    <main className={`min-h-screen py-10 px-4 md:px-10 lg:px-20 transition-colors duration-300 ${
-      isDark ? 'bg-gray-900 text-white' : 'bg-[#F2F2FC] text-[#302e4d]'
+    <main className={`min-h-screen py-16 px-4 md:px-10 lg:px-20 transition-colors duration-300 ${
+      isDark ? "bg-gray-900 text-white" : "bg-[#F2F2FC] text-[#302e4d]"
     }`}>
-      <section id="contact" className="max-w-6xl mx-auto w-full">
+      <section id="contact" className="max-w-4xl mx-auto w-full">
+
         {/* Title */}
-        <div className="mb-10 text-center">
-          <h2 className="text-3xl font-bold transition-colors duration-300">Contact Me</h2>
-        </div>
+        <motion.div
+          initial={{ opacity: 0, y: -20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          viewport={{ once: true }}
+          className="mb-12 text-center"
+        >
+          <h2 className="text-4xl font-bold gradient-text inline-block">Contact Me</h2>
+          <motion.div
+            initial={{ width: 0 }}
+            whileInView={{ width: "70px" }}
+            transition={{ duration: 0.8, delay: 0.3 }}
+            viewport={{ once: true }}
+            className="h-1 mx-auto mt-3 rounded-full"
+            style={{ background: "linear-gradient(135deg, #6c63ff, #3b82f6)" }}
+          />
+          <p className={`mt-4 text-sm ${isDark ? "text-gray-400" : "text-[#504e70]"}`}>
+            Have a project or opportunity? I'd love to hear from you.
+          </p>
+        </motion.div>
 
-        {/* Contact Info */}
-        {/* <div className="flex flex-wrap justify-between text-center gap-y-12 mb-16">
-          <div className="w-full sm:w-1/3 px-4">
-            <div className="text-4xl mb-3">
-              <i className="fa fa-map-marker" />
-            </div>
-            <h4 className="text-lg font-bold mb-1">Address</h4>
-            <p className="text-[#504e70]">Pune, Maharashtra</p>
-          </div>
-          <div className="w-full sm:w-1/3 px-4">
-            <div className="text-4xl mb-3">
-              <i className="fa fa-calendar" />
-            </div>
-            <h4 className="text-lg font-bold mb-1">Call Us On</h4>
-            <p className="text-[#504e70]">+99 **********</p>
-          </div>
-          <div className="w-full sm:w-1/3 px-4">
-            <div className="text-4xl mb-3">
-              <i className="fa fa-envelope" />
-            </div>
-            <h4 className="text-lg font-bold mb-1">Email</h4>
-            <p className="text-[#504e70]">dattarahegaonkar09@email.com</p>
-          </div>
-        </div> */}
-
-        {/* Contact Form */}
-        <form
+        {/* Form */}
+        <motion.form
           ref={form}
           onSubmit={sendEmail}
-          className="space-y-6 max-w-4xl mx-auto px-4"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          viewport={{ once: true }}
+          className={`rounded-3xl p-8 border space-y-5 ${
+            isDark
+              ? "bg-gray-800/50 border-gray-700 backdrop-blur-sm"
+              : "bg-white border-[#d4d4e3] shadow-xl shadow-purple-100/50"
+          }`}
         >
           <div className="flex flex-wrap gap-4">
-            <input
+            <motion.input
+              whileFocus={{ scale: 1.01 }}
               type="text"
               name="name"
-              placeholder="Name*"
+              placeholder="Your Name *"
               required
-              className={`flex-1 min-w-[250px] border rounded-full py-3 px-6 outline-none focus:shadow-lg w-full transition-colors duration-300 ${
-                isDark 
-                  ? 'border-gray-600 text-gray-300 placeholder-gray-500 bg-gray-800 focus:shadow-gray-800/50' 
-                  : 'border-[#d4d4e3] text-[#504e70] bg-white'
-              }`}
+              className={`flex-1 min-w-[220px] ${inputClass}`}
             />
-            <input
+            <motion.input
+              whileFocus={{ scale: 1.01 }}
               type="email"
               name="email"
-              placeholder="Email*"
+              placeholder="Your Email *"
               required
-              className={`flex-1 min-w-[250px] border rounded-full py-3 px-6 outline-none focus:shadow-lg w-full transition-colors duration-300 ${
-                isDark 
-                  ? 'border-gray-600 text-gray-300 placeholder-gray-500 bg-gray-800 focus:shadow-gray-800/50' 
-                  : 'border-[#d4d4e3] text-[#504e70] bg-white'
-              }`}
+              className={`flex-1 min-w-[220px] ${inputClass}`}
             />
           </div>
-          <input
+
+          <motion.input
+            whileFocus={{ scale: 1.01 }}
             type="text"
             name="subject"
-            placeholder="Subject*"
-            className={`w-full border rounded-full py-3 px-6 outline-none focus:shadow-lg transition-colors duration-300 ${
-              isDark 
-                ? 'border-gray-600 text-gray-300 placeholder-gray-500 bg-gray-800 focus:shadow-gray-800/50' 
-                : 'border-[#d4d4e3] text-[#504e70] bg-white'
-            }`}
+            placeholder="Subject"
+            className={inputClass}
           />
-          <textarea
+
+          <motion.textarea
+            whileFocus={{ scale: 1.01 }}
             name="message"
-            placeholder="Your Message*"
+            placeholder="Your Message *"
             rows={6}
             required
-            className={`w-full border rounded-3xl py-3 px-6 outline-none focus:shadow-lg resize-none transition-colors duration-300 ${
-              isDark 
-                ? 'border-gray-600 text-gray-300 placeholder-gray-500 bg-gray-800 focus:shadow-gray-800/50' 
-                : 'border-[#d4d4e3] text-[#504e70] bg-white'
-            }`}
-          ></textarea>
-          <div className="text-center">
-            <button
+            className={`${inputClass} resize-none`}
+          />
+
+          <div className="text-center pt-2">
+            <motion.button
               type="submit"
-              className={`text-white rounded-full px-10 py-3 font-semibold hover:shadow-md transition-all duration-300 ${
-                isDark ? 'bg-blue-600 hover:bg-blue-700' : 'bg-[#302e4d]'
-              }`}
+              whileHover={{ scale: 1.05, boxShadow: "0 10px 30px rgba(108,99,255,0.4)" }}
+              whileTap={{ scale: 0.97 }}
+              className="text-white rounded-full px-12 py-3 font-semibold transition-all duration-300"
+              style={{ background: "linear-gradient(135deg, #6c63ff, #3b82f6)" }}
             >
+              <i className="fa fa-paper-plane mr-2" />
               Send Message
-            </button>
+            </motion.button>
           </div>
-        </form>
+        </motion.form>
+
       </section>
     </main>
   );

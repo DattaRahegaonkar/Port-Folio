@@ -1,6 +1,6 @@
-// src/App.jsx
 import { BrowserRouter as Router, Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { AnimatePresence, motion } from "framer-motion";
 import Sidebar from "./components/Sidebar";
 import FullPage from "./pages/FullPage";
 import Home from "./pages/Home";
@@ -10,6 +10,20 @@ import Projects from "./pages/Projects";
 import Contact from "./pages/Contact";
 import { ThemeProvider, useTheme } from "./context/ThemeContext";
 
+const pageVariants = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+  exit:    { opacity: 0, y: -10, transition: { duration: 0.25 } },
+};
+
+function PageWrapper({ children }) {
+  return (
+    <motion.div variants={pageVariants} initial="initial" animate="animate" exit="exit">
+      {children}
+    </motion.div>
+  );
+}
+
 function AppRoutes() {
   const location = useLocation();
   const navigate = useNavigate();
@@ -17,26 +31,25 @@ function AppRoutes() {
 
   useEffect(() => {
     const navEntry = performance.getEntriesByType("navigation")[0];
-    const isReload = navEntry?.type === "reload";
-    const isNotRoot = location.pathname !== "/";
-
-    if (isReload && isNotRoot) {
+    if (navEntry?.type === "reload" && location.pathname !== "/") {
       navigate("/", { replace: true });
     }
   }, []);
 
   return (
     <main className={`flex-1 min-h-screen p-4 pt-24 overflow-y-auto no-scrollbar transition-colors duration-300 ${
-      isDark ? 'bg-gray-900' : 'bg-[#F2F2FC]'
+      isDark ? "bg-gray-900" : "bg-[#F2F2FC]"
     }`}>
-      <Routes>
-        <Route path="/" element={<FullPage />} />
-        <Route path="/home" element={<Home />} />
-        <Route path="/about" element={<About />} />
-        <Route path="/skill" element={<Skills />} />
-        <Route path="/project" element={<Projects />} />
-        <Route path="/contact" element={<Contact />} />
-      </Routes>
+      <AnimatePresence mode="wait">
+        <Routes location={location} key={location.pathname}>
+          <Route path="/"        element={<PageWrapper><FullPage /></PageWrapper>} />
+          <Route path="/home"    element={<PageWrapper><Home /></PageWrapper>} />
+          <Route path="/about"   element={<PageWrapper><About /></PageWrapper>} />
+          <Route path="/skill"   element={<PageWrapper><Skills /></PageWrapper>} />
+          <Route path="/project" element={<PageWrapper><Projects /></PageWrapper>} />
+          <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+        </Routes>
+      </AnimatePresence>
     </main>
   );
 }
